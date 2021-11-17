@@ -1,113 +1,70 @@
-// Assignment Code
-var generateBtn = document.querySelector("#generate");
-
-var numbers = [0,1,2,3,4,5,6,7,8,9];
-var lowerLetters = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"];
-var upperLetters = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"]
-var specialCharacters = ["!","@","#","$","%","^","&","*"]
-
-var passwordLength = 10;
-var isNumbers =true; //confirm("do you want numbers"); true;
-//if(isNumbers) - didmnt finish this bit
-var isLowerLetters = true;
-var isUpperLetters = false;
-var isSpecial = false;
-
-generateBtn.addEventListener("click", writePassword);
-function generatePassword () {
-  var chars = 
-  "0123456789abcdefghijklmnopqrstuvwxyz!@#$%^&*()ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-  var passwordLength = 12;
-  var password = '';
-  
-  for (var i = 0; i <= passwordLength; i++){
-    var randomNumber = Math.floor(Math.random() * chars.length);
-    password += chars.substring(randomNumber, randomNumber +1);
-  }
-
-  document.getElementById("password").value = password;
-  return password;
-}
-   
+var userPassword = [];
+var userChoice = [];
+var numbers = "0123456789";
+var lowerLetters = "abcdefghijklmnopqrstuvwxyz";
+var upperLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+var specialCharacters = "!@#$%^&*()";
 
 
+function generatePassword(){
 
+    let length = prompt("choose between 8 to 128 char for your password");
 
-  
+    console.log('length', length);
 
-// Write password to the #password input
-function writePassword() {
-  var password = generatePassword();
-  var passwordText = document.querySelector("#password");
+    if(length < 8 || length > 128) {
+        alert("Whoa! Please choose a number between 8 and 128") ;
+        prompt("choose between 8 to 128 char for your password");
+        //need to find a way to make this repeat more than once^^
+     } else if (length === undefined) {
+         alert("Whoa! Please choose a number between 8 and 128")
+         prompt("choose between 8 to 128 char for your password");
+         //need to find a way to make this repeat more than once^^
+     } else if (length != numbers) {
+         alert("Whoa! Please choose a number between 8 and 128")
+         prompt("choose between 8 to 128 char for your password");
+     } 
 
-  passwordText.value = password;
+    let isNumbers = confirm('Would you like numerical values in your password?');
+    console.log('isNumbers',isNumbers)
+    if(isNumbers){
+        userChoice.push(...numbers)
+    } 
+    console.log('user choice',userChoice);
+    
+    let isUpperLetters = confirm('would you like upper letters?');
+    console.log('isUpperLetters',isUpperLetters)
+    if(isUpperLetters){
+        userChoice.push(...upperLetters)
+    }
+    console.log('user choice',userChoice)
 
-}
+    let isLowerLetters = confirm('would you like lower letters?');
+    console.log('isLowerLetters',isLowerLetters)
+    if(isLowerLetters){
+        userChoice.push(...lowerLetters)
+    }
+    console.log('user choice',userChoice)
 
-function generationPassword() {
+    let isSpecChar = confirm('would you like spec chara?');
+    console.log('isSpecChar',isSpecChar)
+    if(isSpecChar){
+        userChoice.push(...specialCharacters)
+    }
+    console.log('user choice',userChoice)
 
-  var password = "";
+    for(let index = 0; index < length; index++){
+        console.log('lenght after loop', length)
+        userPassword.push(userChoice[Math.floor(Math.random() * userChoice.length)]);
+        console.log(userPassword.join('+'))
+    }
 
-//let arrayFromLowToHigh = (low, high) => {
-//   const array = [];
-//   for (let i = low; i <= high; i++) {
-//     array.push(i);
-//   }
-//   return array;
-// };
+    if (!isNumbers && !isUpperLetters && !isLowerLetters && !isSpecChar) {
+        alert("Honey, gotta enter something or whats the point. Try again.");
+        generatePassword();
+    }
 
-// Add event listener to generate button
-
-
-
-
-// Modify Data = Reassigning a new value to an existing variable. 
-
-// Create new data
-
-// Gather dta from the user
-
-// Modify existing data
-
-// Validate data (comparison operators /IF Else)
-
-var myString = "Anthony";
-
-myString =1;
-
-myString =+ 1;
-
-// console.log(alert( "A message:" ));
-
-// console.log(prompt(Give me some info"));
-
-// console.log(confirm("A yes / no choice"));
-
-
-
-  // console.log('generate a password.');
-
-  //loop to repeat, selecting a random character and then appending it to the string 
-  // loop until our string reaches the chosen length.
-
-  // Randomly select an available charact
-  password += "a";
-
-  password += "r";
-
-  password += "5";
-
-  password += "]";
-
-  return password;
-}
-
-//Write password to the #password input
-function writePassword() {
-  var password = generatePassword();
-  var passwordText = document.querySelector("#password");
-
-  passwordText.value = password;
+    document.getElementById('password').value = userPassword.join('');
 
 
 }
