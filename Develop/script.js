@@ -8,21 +8,16 @@ var specialCharacters = "!@#$%^&*()";
 
 function generatePassword(){
 
-    let length = prompt("choose between 8 to 128 char for your password");
+    let length = parseInt(prompt("choose between 8 to 128 char for your password"));
 
     console.log('length', length);
 
     if(length < 8 || length > 128) {
         alert("Whoa! Please choose a number between 8 and 128") ;
-        prompt("choose between 8 to 128 char for your password");
-        //need to find a way to make this repeat more than once^^
-     } else if (length === undefined) {
+        return;
+     } else if (length === undefined || isNaN(length)) {
          alert("Whoa! Please choose a number between 8 and 128")
-         prompt("choose between 8 to 128 char for your password");
-         //need to find a way to make this repeat more than once^^
-     } else if (length != numbers) {
-         alert("Whoa! Please choose a number between 8 and 128")
-         prompt("choose between 8 to 128 char for your password");
+         return;
      } 
 
     let isNumbers = confirm('Would you like numerical values in your password?');
