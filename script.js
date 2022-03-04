@@ -70,5 +70,5 @@ function generatePassword(){
 
     document.getElementById('password').value = userPassword.join('');
 
-
+//test
 }
